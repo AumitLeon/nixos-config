@@ -78,7 +78,7 @@
   #  /etc/profiles/per-user/leon/etc/profile.d/hm-session-vars.sh
   #
   home.sessionVariables = {
-    # EDITOR = "emacs";
+    EDITOR = "nvim";
   };
 
   programs.zsh = {
@@ -86,13 +86,17 @@
    autosuggestion.enable = true; # Enables auto-suggestions
    syntaxHighlighting.enable = true; # Enables syntax highlighting
    shellAliases = {
-    update = "sudo nixos-rebuild switch --flake /etc/nixos/#nixos";
+    update = "sudo nixos-rebuild switch --flake /home/leon/nixos-config/#nixos";
   };
     oh-my-zsh = {
       enable = true;
       plugins = [ ];
       theme = "robbyrussell";
     };
+  };
+
+  programs.neovim = {
+    enable = true;
   };
 
   programs.atuin = {
@@ -119,6 +123,7 @@
 
     extraConfig = {
       init.defaultBranch = "main";
+      core.editor = "nvim";
     };
   };
 
