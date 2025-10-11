@@ -28,6 +28,7 @@
     pkgs.git
     pkgs.gnupg
     pkgs.pinentry
+    pkgs.jq
     # # Adds the 'hello' command to your environment. It prints a friendly
     # # "Hello, world!" when run.
     # pkgs.hello
