@@ -30,6 +30,7 @@
     pkgs.pinentry
     pkgs.jq
     pkgs.fastfetch
+    pkgs.amp-cli
     # # Adds the 'hello' command to your environment. It prints a friendly
     # # "Hello, world!" when run.
     # pkgs.hello
