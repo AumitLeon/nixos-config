@@ -12,6 +12,11 @@
       # (import "${home-manager}/nixos")
     ];
 
+  fileSystems."/data" = {
+    device = "/dev/disk/by-uuid/841f10ff-60cd-4a66-9cf7-7fbbb3940a9b";
+    fsType = "ext4";
+    options = [ "nofail" ];
+  };
 
   programs.zsh = { 
     enable = true;
@@ -20,7 +25,6 @@
   programs.starship = {
     enable = true;
   };
-
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -88,6 +92,9 @@
     #media-session.enable = true;
   };
 
+  # Tailscale
+  services.tailscale.enable = true;
+
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 
@@ -128,7 +135,11 @@
     git curl ripgrep fd
     spotify
     ghostty
+    bitwarden-desktop
+    gdu
+    tailscale
  ];
+
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
