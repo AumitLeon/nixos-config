@@ -108,6 +108,20 @@
     enable = true;
   };
 
+   programs.direnv= {
+    enable = true;
+    enableZshIntegration = true;
+    nix-direnv.enable = true;
+
+    config = {
+      whitelist = {
+        prefix= [
+          "~/dev/github.com/aumitleon"
+        ];
+      };
+    };
+  };
+
   programs.atuin = {
     enable = true;
   };
@@ -137,6 +151,22 @@
   };
 
   programs.fastfetch = {
+    enable = true;
+  };
+
+
+  programs.ssh = {
+    enable = true;
+    addKeysToAgent = "yes";  # adds the key to the agent on first use
+    extraConfig = ''
+      Host github.com
+        HostName github.com
+        IdentityFile ~/.ssh/id_ed25519
+        IdentitiesOnly yes
+    '';
+  };
+
+  services.ssh-agent = {
     enable = true;
   };
 
