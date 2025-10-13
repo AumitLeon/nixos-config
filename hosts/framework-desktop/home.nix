@@ -89,7 +89,7 @@
    autosuggestion.enable = true; # Enables auto-suggestions
    syntaxHighlighting.enable = true; # Enables syntax highlighting
    shellAliases = {
-    update = "sudo nixos-rebuild switch --flake /home/leon/nixos-config/#nixos";
+    update = "sudo nixos-rebuild switch --flake /home/leon/nixos-config/#framework-desktop";
   };
     oh-my-zsh = {
       enable = true;
