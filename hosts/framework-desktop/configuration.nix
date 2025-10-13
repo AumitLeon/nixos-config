@@ -138,6 +138,7 @@
     bitwarden-desktop
     gdu
     tailscale
+    typora
  ];
 
 
