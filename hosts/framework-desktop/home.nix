@@ -20,17 +20,23 @@
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home.packages = [
-    pkgs.zsh
+    pkgs.amp-cli
     pkgs.atuin
-    pkgs.starship
     pkgs.claude-code
+    pkgs.eza
+    pkgs.fastfetch
+    pkgs.fzf
     pkgs.gh
     pkgs.git
     pkgs.gnupg
-    pkgs.pinentry
+    pkgs.htop
     pkgs.jq
-    pkgs.fastfetch
-    pkgs.amp-cli
+    pkgs.pinentry
+    pkgs.ripgrep
+    pkgs.starship
+    pkgs.zsh
+
+
     # # Adds the 'hello' command to your environment. It prints a friendly
     # # "Hello, world!" when run.
     # pkgs.hello
