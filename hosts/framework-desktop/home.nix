@@ -1,6 +1,13 @@
-{ config, pkgs, ... }:
-
 {
+  config,
+  pkgs,
+  inputs,
+  ...
+}: {
+  imports = [
+    ../../modules/home-manager/nvf.nix
+  ];
+
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
   home.username = "leon";
@@ -35,7 +42,6 @@
     pkgs.ripgrep
     pkgs.starship
     pkgs.zsh
-
 
     # # Adds the 'hello' command to your environment. It prints a friendly
     # # "Hello, world!" when run.
@@ -91,15 +97,15 @@
   };
 
   programs.zsh = {
-   enable = true;
-   autosuggestion.enable = true; # Enables auto-suggestions
-   syntaxHighlighting.enable = true; # Enables syntax highlighting
-   shellAliases = {
-    update = "sudo nixos-rebuild switch --flake /home/leon/nixos-config/#framework-desktop";
-  };
+    enable = true;
+    autosuggestion.enable = true; # Enables auto-suggestions
+    syntaxHighlighting.enable = true; # Enables syntax highlighting
+    shellAliases = {
+      update = "sudo nixos-rebuild switch --flake /home/leon/nixos-config/#framework-desktop";
+    };
     oh-my-zsh = {
       enable = true;
-      plugins = [ ];
+      plugins = [];
       theme = "robbyrussell";
     };
   };
@@ -108,14 +114,14 @@
     enable = true;
   };
 
-   programs.direnv= {
+  programs.direnv = {
     enable = true;
     enableZshIntegration = true;
     nix-direnv.enable = true;
 
     config = {
       whitelist = {
-        prefix= [
+        prefix = [
           "~/dev/github.com/aumitleon"
         ];
       };
@@ -154,10 +160,9 @@
     enable = true;
   };
 
-
   programs.ssh = {
     enable = true;
-    addKeysToAgent = "yes";  # adds the key to the agent on first use
+    addKeysToAgent = "yes"; # adds the key to the agent on first use
     extraConfig = ''
       Host github.com
         HostName github.com
@@ -174,12 +179,11 @@
   services.gpg-agent = {
     enable = true;
     enableSshSupport = true; # if you want to use GPG keys for SSH
-    pinentryPackage = pkgs.pinentry-curses;  # Terminal-based pinentry
+    pinentryPackage = pkgs.pinentry-curses; # Terminal-based pinentry
 
     # cache the keys forever so we don't get asked for a password
     defaultCacheTtl = 31536000;
     maxCacheTtl = 31536000;
-
   };
 
   # Let Home Manager install and manage itself.
