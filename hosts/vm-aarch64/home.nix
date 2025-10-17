@@ -147,7 +147,7 @@
     userEmail = "aumitleon@gmail.com";
 
     signing = {
-      key = "85CED8113959124F";
+      key = "660BEE63A74EC2BC";
       signByDefault = true;
     };
 
