@@ -1,24 +1,26 @@
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
-
-{ config, pkgs, inputs, ... }:
-
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-      inputs.home-manager.nixosModules.default
-      # (import "${home-manager}/nixos")
-    ];
+  config,
+  pkgs,
+  inputs,
+  ...
+}: {
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+    inputs.home-manager.nixosModules.default
+    # (import "${home-manager}/nixos")
+  ];
 
   fileSystems."/data" = {
     device = "/dev/disk/by-uuid/841f10ff-60cd-4a66-9cf7-7fbbb3940a9b";
     fsType = "ext4";
-    options = [ "nofail" ];
+    options = ["nofail"];
   };
 
-  programs.zsh = { 
+  programs.zsh = {
     enable = true;
   };
 
@@ -33,7 +35,7 @@
   networking.hostName = "nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
-  nix.settings.experimental-features = [ "nix-command" "flakes"];
+  nix.settings.experimental-features = ["nix-command" "flakes"];
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
@@ -101,21 +103,19 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.leon = {
     shell = pkgs.zsh;
-    #shell = pkgs.bashInteractive;
     isNormalUser = true;
     description = "Aumit Leon";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = ["networkmanager" "wheel"];
     packages = with pkgs; [
     ];
   };
 
   home-manager = {
-    extraSpecialArgs = { inherit inputs; };
+    extraSpecialArgs = {inherit inputs;};
     users = {
       "leon" = import ./home.nix;
     };
   };
-
 
   # Install firefox.
   programs.firefox.enable = true;
@@ -132,15 +132,17 @@
     firefox
     google-chrome
     neovim
-    git curl ripgrep fd
+    git
+    curl
+    ripgrep
+    fd
     spotify
     ghostty
     bitwarden-desktop
     gdu
     tailscale
     typora
- ];
-
+  ];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -168,6 +170,4 @@
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "25.05"; # Did you read the comment?
-
 }
-

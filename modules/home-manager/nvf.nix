@@ -50,6 +50,19 @@
         enable = true;
         formatOnSave = true;
         lspkind.enable = true;
+        mappings = {
+          goToDefinition = "gd";
+          goToDeclaration = "gD";
+          goToType = "gy";
+          listImplementations = "gI";
+          listReferences = "gr";
+          hover = "K";
+          renameSymbol = "<leader>rn";
+          codeAction = "<leader>ca";
+          nextDiagnostic = "]d";
+          previousDiagnostic = "[d";
+          signatureHelp = "<C-k>";
+        };
       };
 
       # Debugger
@@ -74,15 +87,22 @@
         context.enable = true;
       };
 
-      # Telescope for fuzzy finding
-      telescope = {
+      # fzf-lua for fuzzy finding
+      fzf-lua = {
         enable = true;
+        profile = "telescope"; # Use telescope-like profile for familiar UX
+        setupOpts = {
+          winopts = {
+            border = "rounded";
+          };
+        };
       };
 
       # File explorer
       filetree = {
         nvimTree = {
           enable = true;
+          openOnSetup = false;
           mappings = {
             toggle = "<leader>e";
             findFile = "<leader>f";
@@ -121,6 +141,31 @@
           mappings.open = "<C-t>";
         };
       };
+
+      # Dashboard
+      dashboard = {
+        alpha = {
+          enable = true;
+          theme = "dashboard"; # Options: "dashboard", "startify", "theta"
+        };
+      };
+
+      # Customize alpha dashboard buttons to match keybindings
+      luaConfigRC.alphaButtons = ''
+        local alpha = require('alpha')
+        local dashboard = require('alpha.themes.dashboard')
+
+        -- Override buttons with your custom keybindings
+        dashboard.section.buttons.val = {
+          dashboard.button("SPC SPC", "  Find file", ":lua require('fzf-lua').files()<CR>"),
+          dashboard.button("SPC /", "  Find text", ":lua require('fzf-lua').live_grep()<CR>"),
+          dashboard.button("SPC f r", "  Recent files", ":lua require('fzf-lua').oldfiles()<CR>"),
+          dashboard.button("SPC e", "  File explorer", ":NvimTreeToggle<CR>"),
+          dashboard.button("q", "  Quit", ":qa<CR>"),
+        }
+
+        alpha.setup(dashboard.opts)
+      '';
       #
       # # Utility plugins
       # utility = {
@@ -195,58 +240,56 @@
 
       # Custom keybindings
       keymaps = [
-        # Telescope keybindings
+        # fzf-lua keybindings
         {
           key = "<leader><space>";
           mode = "n";
-          action = "<cmd>Telescope find_files<CR>";
+          action = "<cmd>lua require('fzf-lua').files()<CR>";
           silent = true;
           desc = "Find files";
         }
         {
           key = "<leader>/";
           mode = "n";
-          action = "<cmd>Telescope live_grep<CR>";
+          action = "<cmd>lua require('fzf-lua').live_grep()<CR>";
           silent = true;
           desc = "Live grep";
         }
         {
           key = "<leader>fb";
           mode = "n";
-          action = "<cmd>Telescope buffers<CR>";
+          action = "<cmd>lua require('fzf-lua').buffers()<CR>";
           silent = true;
           desc = "Find buffers";
         }
         {
           key = "<leader>fh";
           mode = "n";
-          action = "<cmd>Telescope help_tags<CR>";
+          action = "<cmd>lua require('fzf-lua').help_tags()<CR>";
           silent = true;
           desc = "Help tags";
         }
         {
           key = "<leader>fr";
           mode = "n";
-          action = "<cmd>Telescope oldfiles<CR>";
+          action = "<cmd>lua require('fzf-lua').oldfiles()<CR>";
           silent = true;
           desc = "Recent files";
         }
         {
           key = "<leader>fc";
           mode = "n";
-          action = "<cmd>Telescope commands<CR>";
+          action = "<cmd>lua require('fzf-lua').commands()<CR>";
           silent = true;
           desc = "Find commands";
         }
         {
           key = "<leader>gs";
           mode = "n";
-          action = "<cmd>Telescope git_status<CR>";
+          action = "<cmd>lua require('fzf-lua').git_status()<CR>";
           silent = true;
           desc = "Git status";
         }
-
-        # ... your other keybindings ...
       ];
     };
   };
