@@ -101,6 +101,8 @@
     xclip
     nettools
     ghostty
+    chromium
+    firefox
     # # For hypervisors that support auto-resizing, this script forces it.
     # # I've noticed not everyone listens to the udev events so this is a hack.
     # (writeShellScriptBin "xrandr-auto" ''
@@ -111,6 +113,8 @@
     # # if the clipboard sill works.
     # gtkmm3
   ];
+
+  programs.firefox.enable = true;
 
   # Desktop environment configuration
   services.xserver = {
