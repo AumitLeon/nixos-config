@@ -28,7 +28,7 @@
       vm-aarch64 = nixpkgs.lib.nixosSystem {
         specialArgs = {inherit inputs;};
         modules = [
-          ./hosts/vm-aarch64/configuration.nix
+          ./hosts/vm-aarch64/vm-aarch64-configuration.nix
           inputs.home-manager.nixosModules.default
         ];
       };
