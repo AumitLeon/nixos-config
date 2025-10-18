@@ -1,7 +1,11 @@
-{ config, pkgs, lib, inputs, ... }:
-
 {
-  imports = [ 
+  config,
+  pkgs,
+  lib,
+  inputs,
+  ...
+}: {
+  imports = [
     ./hardware-configuration.nix
     inputs.home-manager.nixosModules.default
   ];
@@ -22,7 +26,7 @@
   #   # Needed for k2pdfopt 2.53.
   #   "mupdf-1.17.0"
   # ];
-  
+
   programs.zsh.enable = true;
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.leon = {
@@ -53,7 +57,7 @@
   networking.hostName = "vm-aarch64";
 
   # Set your time zone.
-  time.timeZone = "America/Los_Angeles";
+  time.timeZone = "America/New_York";
 
   # The global useDHCP flag is deprecated, therefore explicitly set to false here.
   # Per-interface useDHCP will be mandatory in the future, so this generated config
