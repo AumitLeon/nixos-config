@@ -6,6 +6,7 @@
 }: {
   imports = [
     ../../modules/home-manager/nvf.nix
+    ../../modules/home-manager/ghostty.nix
   ];
 
   # Home Manager needs a bit of information about you and the paths it should

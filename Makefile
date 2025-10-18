@@ -18,34 +18,6 @@ SSH_OPTIONS=-o PubkeyAuthentication=no -o UserKnownHostsFile=/dev/null -o Strict
 
 
 
-# vm/bootstrap0:
-# 	ssh $(SSH_OPTIONS) -p$(NIXPORT) root@$(NIXADDR) " \
-# 		parted /dev/$(NIXDISK) -- mklabel gpt; \
-# 		parted /dev/$(NIXDISK) -- mkpart primary 512MB -8GB; \
-# 		parted /dev/$(NIXDISK) -- mkpart primary linux-swap -8GB 100\%; \
-# 		parted /dev/$(NIXDISK) -- mkpart ESP fat32 1MB 512MB; \
-# 		parted /dev/$(NIXDISK) -- set 3 esp on; \
-# 		sleep 1; \
-# 		mkfs.ext4 -L nixos /dev/$(NIXDISK)1; \
-# 		mkswap -L swap /dev/$(NIXDISK)2; \
-# 		mkfs.fat -F 32 -n boot /dev/$(NIXDISK)3; \
-# 		sleep 1; \
-# 		mount /dev/disk/by-label/nixos /mnt; \
-# 		mkdir -p /mnt/boot; \
-# 		mount /dev/disk/by-label/boot /mnt/boot; \
-# 		nixos-generate-config --root /mnt; \
-# 		sed --in-place '/system\.stateVersion = .*/a \
-# 			nix.package = pkgs.nixVersions.latest;\n \
-# 			nix.extraOptions = \"experimental-features = nix-command flakes\";\n \
-#   		services.openssh.enable = true;\n \
-# 			services.openssh.settings.PasswordAuthentication = true;\n \
-# 			services.openssh.settings.PermitRootLogin = \"yes\";\n \
-# 			users.users.root.initialPassword = \"root\";\n \
-# 		' /mnt/etc/nixos/configuration.nix; \
-# 		nixos-install --no-root-passwd && reboot; \
-# 	"
-
-
 vm/bootstrap0:
 	ssh $(SSH_OPTIONS) -p$(NIXPORT) root@$(NIXADDR) 'set -euxo pipefail; \
 	  DISK="/dev/$(NIXDISK)"; \
@@ -79,6 +51,7 @@ vm/bootstrap0:
 vm/bootstrap:
 	NIXUSER=root $(MAKE) vm/copy
 	NIXUSER=root $(MAKE) vm/switch
+	echo "Set user password for $(NIXUSER) in VM using sudo passwd $(NIXUSER)"
 	$(MAKE) vm/secrets
 	ssh $(SSH_OPTIONS) -p$(NIXPORT) $(NIXUSER)@$(NIXADDR) " \
 		sudo reboot; \
