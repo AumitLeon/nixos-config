@@ -16,8 +16,6 @@ NIXDISK ?= nvme0n1
 # reused a lot so we just store them up here.
 SSH_OPTIONS=-o PubkeyAuthentication=no -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no
 
-
-
 vm/bootstrap0:
 	ssh $(SSH_OPTIONS) -p$(NIXPORT) root@$(NIXADDR) 'set -euxo pipefail; \
 	  DISK="/dev/$(NIXDISK)"; \
@@ -57,7 +55,6 @@ vm/bootstrap:
 		sudo reboot; \
 	"
 
-
 # copy our secrets into the VM
 vm/secrets:
 	# GPG keyring
@@ -70,7 +67,6 @@ vm/secrets:
 	rsync -av -e 'ssh $(SSH_OPTIONS)' \
 		--exclude='environment' \
 		$(HOME)/.ssh/ $(NIXUSER)@$(NIXADDR):~/.ssh
-
 
 # copy the Nix configurations into the VM.
 vm/copy:

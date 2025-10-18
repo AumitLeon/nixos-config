@@ -1,4 +1,10 @@
-{ config, pkgs, lib, ... }: {
+{
+  config,
+  pkgs,
+  lib,
+  inputs,
+  ...
+}: {
   imports = [
     ./hardware-configuration.nix
     ./vm-shared.nix
@@ -13,6 +19,19 @@
   # Lots of stuff that uses aarch64 that claims doesn't work, but actually works.
   nixpkgs.config.allowUnfree = true;
   nixpkgs.config.allowUnsupportedSystem = true;
+
+  # Define your hostname.
+  networking.hostName = "vm-aarch64-nixos";
+
+  home-manager = {
+    extraSpecialArgs = {
+      inherit inputs;
+      flakeName = "vm-aarch64";
+    };
+    users = {
+      "leon" = import ../../users/leon/home.nix;
+    };
+  };
 
   # This works through our custom module imported above
   virtualisation.vmware.guest.enable = true;

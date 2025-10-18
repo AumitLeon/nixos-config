@@ -20,7 +20,7 @@ In VMware Fusion, we'll create our boot system with the following configurations
 
 - Name the machine accordingly. I usually go with `NixOS`.
 - Set CPU cores to about half available, and memory to about half - 2/3s. Whatever feels comfortable, this can be tweaked.
-- Set hardrive to `nvme`, and give it at least 150 GB. Note, my particular M4 Max machine has nvme drives, but other machines might have different ones. Would need to modify the makefile accordingly for different SSD types because they would be identified differently for the partioning. 
+- Set hardrive to `nvme`, and give it at least 150 GB. Note, my particular M4 Max machine has nvme drives, but other machines might have different types of drives -- you should confirm this in your system report. You would need to modify the Makefile accordingly for different SSD types because they would be identified differently for the partioning. 
 - Enable graphics acceleration and use full retina display for diaplay settings.
 - Remove extra configs like the sounds card, video, etc. 
 
