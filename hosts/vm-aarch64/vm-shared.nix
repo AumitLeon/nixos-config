@@ -39,7 +39,10 @@
   };
 
   home-manager = {
-    extraSpecialArgs = {inherit inputs;};
+    extraSpecialArgs = {
+      inherit inputs;
+      flakeName = "vm-aarch64";
+    };
     users = {
       "leon" = import ../../users/leon/home.nix;
     };
@@ -54,7 +57,7 @@
   boot.loader.systemd-boot.consoleMode = "0";
 
   # Define your hostname.
-  networking.hostName = "vm-aarch64";
+  networking.hostName = "vm-aarch64-nixos";
 
   # Set your time zone.
   time.timeZone = "America/New_York";

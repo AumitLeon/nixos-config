@@ -2,12 +2,22 @@
   config,
   pkgs,
   inputs,
+  flakeName,
+  lib,
   ...
 }: {
-  imports = [
-    ../../modules/home-manager/nvf.nix
-    ../../modules/home-manager/ghostty.nix
-  ];
+  imports =
+    [
+      ../../modules/home-manager/nvf.nix
+      ../../modules/home-manager/ghostty.nix
+    ]
+    ++ (
+      if flakeName == "framework-desktop"
+      then [../../modules/home-manager/git-framework-desktop.nix]
+      else if flakeName == "vm-aarch64"
+      then [../../modules/home-manager/git-vm-aarch64.nix]
+      else []
+    );
 
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
@@ -103,7 +113,7 @@
     autosuggestion.enable = true; # Enables auto-suggestions
     syntaxHighlighting.enable = true; # Enables syntax highlighting
     shellAliases = {
-      update = "sudo nixos-rebuild switch --flake /home/leon/nixos-config/#vm-aarch64";
+      update = "sudo nixos-rebuild switch --flake /home/leon/nixos-config/#${flakeName}";
     };
     oh-my-zsh = {
       enable = true;
@@ -140,22 +150,6 @@
 
   programs.gh = {
     enable = true;
-  };
-
-  programs.git = {
-    enable = true;
-    userName = "Aumit Leon";
-    userEmail = "aumitleon@gmail.com";
-
-    signing = {
-      key = "660BEE63A74EC2BC";
-      signByDefault = true;
-    };
-
-    extraConfig = {
-      init.defaultBranch = "main";
-      core.editor = "nvim";
-    };
   };
 
   programs.fastfetch = {
