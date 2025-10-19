@@ -15,8 +15,12 @@
     };
   };
 
-  outputs = { self, nixpkgs, ... }@inputs: {
-    nixosConfigurations = { 
+  outputs = {
+    self,
+    nixpkgs,
+    ...
+  } @ inputs: {
+    nixosConfigurations = {
       framework-desktop = nixpkgs.lib.nixosSystem {
         specialArgs = {inherit inputs;};
         modules = [
@@ -28,11 +32,10 @@
       vm-aarch64 = nixpkgs.lib.nixosSystem {
         specialArgs = {inherit inputs;};
         modules = [
-          ./hosts/vm-aarch64/vm-aarch64-configuration.nix
+          ./hosts/vm/vm-aarch64-configuration.nix
           inputs.home-manager.nixosModules.default
         ];
       };
-
     };
   };
 }
