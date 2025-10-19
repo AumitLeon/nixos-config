@@ -11,8 +11,10 @@
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
     inputs.home-manager.nixosModules.default
-    # (import "${home-manager}/nixos")
   ];
+
+  # Be careful updating this.
+  boot.kernelPackages = pkgs.linuxPackages_latest;
 
   fileSystems."/data" = {
     device = "/dev/disk/by-uuid/841f10ff-60cd-4a66-9cf7-7fbbb3940a9b";
