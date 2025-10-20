@@ -20,6 +20,7 @@ In VMware Fusion, we'll create our boot system with the following configurations
 
 - Name the machine accordingly. I usually go with `NixOS`.
 - Set CPU cores to about half available, and memory to about half - 2/3s. Whatever feels comfortable, this can be tweaked.
+- Use bridged networking. NAT networking is preferred, but there is an issue DNS currently. 
 - Set hardrive to `nvme`, and give it at least 150 GB. Note, my particular M4 Max machine has nvme drives, but other machines might have different types of drives -- you should confirm this in your system report. You would need to modify the Makefile accordingly for different SSD types because they would be identified differently for the partioning. 
 - Enable graphics acceleration and use full retina display for diaplay settings.
 - Remove extra configs like the sounds card, video, etc. 
@@ -68,3 +69,6 @@ sudo passwd leon
 Once the password is set, I can come back to my Mac terminal and enter that password to the prompt to continue transferring the secrets. 
 
 One the script is done, I can go back to the VM that is rebooting, and it will open me up to my environment!
+
+### Other VMware Fusion Tips:
+- If your mouse is offset, under your VM's mouse/keyboard settings, enable `Always optimize mouse for games`. 

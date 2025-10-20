@@ -159,13 +159,16 @@
 
   programs.ssh = {
     enable = true;
-    addKeysToAgent = "yes"; # adds the key to the agent on first use
-    extraConfig = ''
-      Host github.com
-        HostName github.com
-        IdentityFile ~/.ssh/id_ed25519
-        IdentitiesOnly yes
-    '';
+    matchBlocks = {
+      "*" = {
+        addKeysToAgent = "yes"; # adds the key to the agent on first use
+      };
+      "github.com" = {
+        hostname = "github.com";
+        identityFile = "~/.ssh/id_ed25519";
+        identitiesOnly = true;
+      };
+    };
   };
 
   services.ssh-agent = {
@@ -176,7 +179,7 @@
   services.gpg-agent = {
     enable = true;
     enableSshSupport = true; # if you want to use GPG keys for SSH
-    pinentryPackage = pkgs.pinentry-curses; # Terminal-based pinentry
+    pinentry.package = pkgs.pinentry-curses; # Terminal-based pinentry
 
     # cache the keys forever so we don't get asked for a password
     defaultCacheTtl = 31536000;
