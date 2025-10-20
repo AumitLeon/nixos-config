@@ -8,6 +8,7 @@
   imports = [
     ./hardware-configuration.nix
     inputs.home-manager.nixosModules.default
+    ../../modules/keyd.nix
   ];
 
   # Be careful updating this.
@@ -120,9 +121,10 @@
   services.xserver = {
     enable = true;
     xkb.layout = "us";
-    desktopManager.gnome.enable = true;
-    displayManager.gdm.enable = true;
   };
+
+  services.desktopManager.gnome.enable = true;
+  services.displayManager.gdm.enable = true;
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.

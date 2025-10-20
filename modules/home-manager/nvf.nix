@@ -240,6 +240,15 @@
 
       # Custom keybindings
       keymaps = [
+        # Insert mode: Restore Ctrl+W for word deletion
+        # (keyd remaps it system-wide, so we need to handle it)
+        {
+          key = "<C-w>";
+          mode = "i";
+          action = "<C-o>db";
+          silent = true;
+          desc = "Delete word backwards";
+        }
         # fzf-lua keybindings
         {
           key = "<leader><space>";
