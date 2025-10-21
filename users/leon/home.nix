@@ -121,6 +121,11 @@
       plugins = [];
       theme = "robbyrussell";
     };
+    initContent = ''
+      # Set Ctrl+G as interrupt signal (SIGINT) instead of Ctrl+C
+      # This allows Ctrl+C (which we map to CMD+C via keyd) to be used for copy in terminal
+      stty intr ^G
+    '';
   };
 
   programs.neovim = {
