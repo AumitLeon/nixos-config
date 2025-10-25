@@ -219,6 +219,18 @@
           treesitter.enable = true;
         };
 
+        scala = {
+          enable = true;
+          lsp.enable = true;
+          treesitter.enable = true;
+        };
+
+        java = {
+          enable = true;
+          lsp.enable = true;
+          treesitter.enable = true;
+        };
+
         # Add more languages as needed:
         # rust = {
         #   enable = true;
