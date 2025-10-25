@@ -29,6 +29,7 @@
         vim.opt.expandtab = true   -- Use spaces instead of tabs
         vim.opt.softtabstop = 2    -- Number of spaces per Tab
         vim.opt.smartindent = true -- Smart autoindenting on new lines
+        vim.opt.clipboard = "unnamedplus" -- Use system clipboard for yank/paste
       '';
 
       # Add commenting support with gc
