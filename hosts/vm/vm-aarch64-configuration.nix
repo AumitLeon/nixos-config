@@ -21,7 +21,7 @@
   nixpkgs.config.allowUnsupportedSystem = true;
 
   # Define your hostname.
-  networking.hostName = "vm-nixos";
+  networking.hostName = "vm-dev";
 
   home-manager = {
     extraSpecialArgs = {

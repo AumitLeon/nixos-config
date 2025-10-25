@@ -147,6 +147,7 @@
   # # and release snaps so we keep this enabled.
   # services.snap.enable = true;
 
+  # On the host, we reach our VM via: {host-name}.local
   services.avahi = {
     enable = true;
     nssmdns = true;
