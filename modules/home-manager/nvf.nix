@@ -312,6 +312,14 @@
           silent = true;
           desc = "Git status";
         }
+        # Buffer management
+        {
+          key = "bd";
+          mode = "n";
+          action = "<cmd>bdelete<CR>";
+          silent = true;
+          desc = "Close active buffer";
+        }
       ];
     };
   };
