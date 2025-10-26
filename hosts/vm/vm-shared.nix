@@ -21,6 +21,16 @@
       keep-outputs = true
       keep-derivations = true
     '';
+
+    # Automatic garbage collection
+    gc = {
+      automatic = true;
+      dates = "weekly";
+      options = "--delete-older-than 30d";
+    };
+
+    # Automatically optimize storage by hard-linking identical files
+    optimise.automatic = true;
   };
 
   # nixpkgs.config.permittedInsecurePackages = [
@@ -97,13 +107,13 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    gnumake
-    killall
-    xclip
-    nettools
-    ghostty
     chromium
     firefox
+    ghostty
+    gnumake
+    killall
+    nettools
+    xclip
     # # For hypervisors that support auto-resizing, this script forces it.
     # # I've noticed not everyone listens to the udev events so this is a hack.
     # (writeShellScriptBin "xrandr-auto" ''
