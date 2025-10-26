@@ -41,20 +41,21 @@
     pkgs.amp-cli
     pkgs.atuin
     pkgs.claude-code
+    pkgs.codex
     pkgs.eza
     pkgs.fastfetch
     pkgs.fzf
     pkgs.gh
     pkgs.git
     pkgs.gnupg
+    pkgs.home-manager
     pkgs.htop
     pkgs.jq
     pkgs.pinentry
     pkgs.ripgrep
     pkgs.starship
-    pkgs.zsh
     pkgs.tree
-    pkgs.codex
+    pkgs.zsh
 
     # # Adds the 'hello' command to your environment. It prints a friendly
     # # "Hello, world!" when run.
@@ -115,6 +116,7 @@
     syntaxHighlighting.enable = true; # Enables syntax highlighting
     shellAliases = {
       update = "sudo nixos-rebuild switch --flake /home/leon/nixos-config/#${flakeName}";
+      cleanup = "home-manager expire-generations '-30 days' && nix-collect-garbage";
     };
     oh-my-zsh = {
       enable = true;

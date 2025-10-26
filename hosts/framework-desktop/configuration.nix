@@ -40,6 +40,16 @@
 
   nix.settings.experimental-features = ["nix-command" "flakes"];
 
+  # Automatic garbage collection
+  nix.gc = {
+    automatic = true;
+    dates = "weekly";
+    options = "--delete-older-than 30d";
+  };
+
+  # Automatically optimize storage by hard-linking identical files
+  nix.optimise.automatic = true;
+
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
