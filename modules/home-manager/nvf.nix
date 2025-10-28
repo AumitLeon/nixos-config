@@ -188,7 +188,7 @@
         };
       };
 
-      # Indent guides and scope highlighting
+      # Indent guides, scope highlighting, smooth scrolling, and git features
       extraPlugins = {
         snacks-nvim = {
           package = pkgs.vimPlugins.snacks-nvim;
@@ -199,6 +199,12 @@
                 char = "▏",
               },
               scope = {
+                enabled = true,
+              },
+              scroll = {
+                enabled = true,
+              },
+              git = {
                 enabled = true,
               },
             })
@@ -337,6 +343,14 @@
           action = "<cmd>bdelete<CR>";
           silent = true;
           desc = "Close active buffer";
+        }
+        # Git blame
+        {
+          key = "gb";
+          mode = "n";
+          action = "<cmd>lua Snacks.git.blame_line()<CR>";
+          silent = true;
+          desc = "Git blame line";
         }
       ];
     };
