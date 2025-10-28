@@ -188,29 +188,21 @@
         };
       };
 
-      # Indent guides
-      visuals = {
-        indent-blankline = {
-          enable = true;
-          setupOpts = {
-            indent = {
-              char = "▏";  # Character to use for indent lines
-            };
-            scope = {
-              enabled = true;  # Highlight the current scope
-              show_start = false;
-              show_end = false;
-              highlight = ["Special"];  # Use colorful highlight group for scope (orange/purple in gruvbox)
-              include = {
-                node_type = {
-                  nix = ["function_expression" "let_expression" "let_attrset_expression" "with_expression" "attrset_expression" "rec_attrset_expression" "assert_expression" "if_expression"];
-                  python = ["if_statement" "for_statement" "while_statement" "with_statement" "try_statement" "function_definition" "class_definition"];
-                  # Add other languages as needed
-                  "*" = ["if_statement" "for_statement" "while_statement" "function_definition" "class_definition"];
-                };
-              };
-            };
-          };
+      # Indent guides and scope highlighting
+      extraPlugins = {
+        snacks-nvim = {
+          package = pkgs.vimPlugins.snacks-nvim;
+          setup = ''
+            require('snacks').setup({
+              indent = {
+                enabled = true,
+                char = "▏",
+              },
+              scope = {
+                enabled = true,
+              },
+            })
+          '';
         };
       };
 
