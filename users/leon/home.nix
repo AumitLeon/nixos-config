@@ -55,6 +55,7 @@
     pkgs.ripgrep
     pkgs.starship
     pkgs.tree
+    pkgs.wl-clipboard
     pkgs.zsh
 
     # # Adds the 'hello' command to your environment. It prints a friendly
