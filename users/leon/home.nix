@@ -24,6 +24,19 @@
   home.username = "leon";
   home.homeDirectory = "/home/leon";
 
+  # Wallpaper
+  dconf.settings = {
+    "org/gnome/desktop/background" = {
+      picture-uri = "file:///home/leon/nixos-config/assets/wallpapers/nix-bright.png";
+      picture-uri-dark = "file:///home/leon/nixos-config/assets/wallpapers/nix-dark.png";
+      picture-options = "zoom";
+    };
+
+    "org/gnome/desktop/screensaver" = {
+      picture-uri = "file:///home/leon/nixos-config/assets/wallpapers/nix-dark.png";
+    };
+  };
+
   nixpkgs.config.allowUnfree = true;
 
   # This value determines the Home Manager release that your configuration is
