@@ -64,7 +64,6 @@
     pkgs.home-manager
     pkgs.htop
     pkgs.jq
-    pkgs.pinentry
     pkgs.ripgrep
     pkgs.starship
     pkgs.tree
