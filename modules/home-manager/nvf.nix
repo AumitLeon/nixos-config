@@ -336,6 +336,21 @@
           silent = true;
           desc = "Git status";
         }
+        # Diagnostics
+        {
+          key = "ud";
+          mode = "n";
+          action = "<cmd>lua vim.diagnostic.open_float()<CR>";
+          silent = true;
+          desc = "Show diagnostics";
+        }
+        {
+          key = "<leader>td";
+          mode = "n";
+          action = "<cmd>lua vim.diagnostic.enable(not vim.diagnostic.is_enabled())<CR>";
+          silent = true;
+          desc = "Toggle diagnostics";
+        }
         # Buffer management
         {
           key = "bd";
