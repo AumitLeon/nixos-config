@@ -160,7 +160,7 @@
   # On the host, we reach our VM via: {host-name}.local
   services.avahi = {
     enable = true;
-    nssmdns = true;
+    nssmdns4 = true;
     publish = {
       enable = true;
       addresses = true;
