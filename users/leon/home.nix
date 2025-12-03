@@ -6,18 +6,11 @@
   lib,
   ...
 }: {
-  imports =
-    [
-      ../../modules/home-manager/nvf.nix
-      ../../modules/home-manager/ghostty.nix
-    ]
-    ++ (
-      if flakeName == "framework-desktop"
-      then [../../modules/home-manager/git-framework-desktop.nix]
-      else if flakeName == "vm-aarch64"
-      then [../../modules/home-manager/git-vm-aarch64.nix]
-      else []
-    );
+  imports = [
+    ../../modules/home-manager/nvf.nix
+    ../../modules/home-manager/ghostty.nix
+    ../../modules/home-manager/git.nix
+  ];
 
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
@@ -130,6 +123,7 @@
     shellAliases = {
       update = "sudo nixos-rebuild switch --flake /home/leon/nixos-config/#${flakeName}";
       cleanup = "home-manager expire-generations '-30 days' && nix-collect-garbage";
+      root = "cd $(git root)";
     };
     oh-my-zsh = {
       enable = true;
