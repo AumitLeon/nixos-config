@@ -10,6 +10,7 @@
     ../../modules/home-manager/nvf.nix
     ../../modules/home-manager/ghostty.nix
     ../../modules/home-manager/git.nix
+    ../../modules/home-manager/jujutsu.nix
   ];
 
   # Home Manager needs a bit of information about you and the paths it should
@@ -57,6 +58,7 @@
     pkgs.home-manager
     pkgs.htop
     pkgs.jq
+    pkgs.jujutsu
     pkgs.ripgrep
     pkgs.starship
     pkgs.tree
