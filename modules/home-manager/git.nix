@@ -19,10 +19,6 @@ in {
       signByDefault = signingKey != null;
     };
 
-    aliases = {
-      root = "rev-parse --show-toplevel";
-    };
-
     settings = {
       user = {
         name = "Aumit Leon";
@@ -30,6 +26,10 @@ in {
       };
       init.defaultBranch = "main";
       core.editor = "nvim";
+
+      aliases = {
+        root = "rev-parse --show-toplevel";
+      };
     };
   };
 }
