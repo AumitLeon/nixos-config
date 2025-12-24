@@ -38,6 +38,10 @@ in {
       git = {
         push-branch-prefix = "aumit/";
       };
+
+      aliases = {
+        tug = ["bookmark" "move" "--from" "heads(::@- & bookmarks())" "--to" "@-"];
+      };
     };
   };
 }
