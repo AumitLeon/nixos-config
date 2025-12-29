@@ -60,6 +60,8 @@
     pkgs.htop
     pkgs.jq
     pkgs.jujutsu
+    pkgs.meld
+    pkgs.mergiraf
     pkgs.ripgrep
     pkgs.starship
     pkgs.tree

@@ -31,6 +31,7 @@ in {
       # Set the default editor
       ui = {
         editor = "nvim";
+        merge-editor = "meld";
         default-command = "log";
         diff-formatter = ["difft" "--color=always" "$left" "$right"];
       };
