@@ -49,6 +49,7 @@
     pkgs.atuin
     pkgs.claude-code
     pkgs.codex
+    pkgs.difftastic
     pkgs.eza
     pkgs.fastfetch
     pkgs.fzf

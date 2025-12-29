@@ -32,6 +32,7 @@ in {
       ui = {
         editor = "nvim";
         default-command = "log";
+        diff-formatter = ["difft" "--color=always" "$left" "$right"];
       };
 
       # Git integration settings
