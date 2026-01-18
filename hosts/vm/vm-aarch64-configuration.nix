@@ -24,6 +24,7 @@
   networking.hostName = "vm-dev";
 
   home-manager = {
+    useGlobalPkgs = true;
     extraSpecialArgs = {
       inherit inputs;
       flakeName = "vm-aarch64";

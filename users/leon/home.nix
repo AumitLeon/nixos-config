@@ -58,6 +58,7 @@
     pkgs.gnupg
     pkgs.home-manager
     pkgs.htop
+    pkgs.jj-starship
     pkgs.jq
     pkgs.jujutsu
     pkgs.meld
@@ -66,26 +67,6 @@
     pkgs.tree
     pkgs.wl-clipboard
     pkgs.zsh
-
-    (pkgs.rustPlatform.buildRustPackage rec {
-      pname = "jj-starship";
-      version = "0.3.3";
-
-      src = pkgs.fetchFromGitHub {
-        owner = "dmmulroy";
-        repo = "jj-starship";
-        rev = "v${version}";
-        hash = "sha256-S2vaz2WZNHjVyEWTXDzMultToxMsPaUJi8Jz0dKPMrA=";
-      };
-
-      cargoHash = "sha256-YpNtAVn+yG1xfj30hkAWpXWMyc6KvTIgMfcBJlFaZnU=";
-
-      meta = with pkgs.lib; {
-        description = "Unified Starship prompt module for Git and Jujutsu";
-        homepage = "https://github.com/dmmulroy/jj-starship";
-        license = licenses.mit;
-      };
-    })
 
     # # Adds the 'hello' command to your environment. It prints a friendly
     # # "Hello, world!" when run.
@@ -187,9 +168,8 @@
     enable = true;
     settings = {
       custom.jj = {
-        command = "jj-starship";
-        detect_folders = [".jj" ".git"];
-        shell = ["sh"];
+        when = "jj-starship detect";
+        shell = ["jj-starship"];
         format = "$output ";
       };
       git_branch = {

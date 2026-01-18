@@ -124,6 +124,7 @@
   };
 
   home-manager = {
+    useGlobalPkgs = true;
     extraSpecialArgs = {
       inherit inputs;
       flakeName = "framework-desktop";
