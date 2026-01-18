@@ -219,7 +219,7 @@
           format.enable = true;
           lsp = {
             enable = true;
-            server = "nixd"; # or "nil"
+            servers = ["nixd"]; # or ["nil"]
           };
           treesitter.enable = true;
         };
