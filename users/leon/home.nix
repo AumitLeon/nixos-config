@@ -202,10 +202,6 @@
     };
   };
 
-  services.ssh-agent = {
-    enable = true;
-  };
-
   # Optional: Configure gpg-agent
   services.gpg-agent = {
     enable = true;
