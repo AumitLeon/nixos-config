@@ -30,6 +30,8 @@
         vim.opt.softtabstop = 2    -- Number of spaces per Tab
         vim.opt.smartindent = true -- Smart autoindenting on new lines
         vim.opt.clipboard = "unnamedplus" -- Use system clipboard for yank/paste
+        vim.opt.foldlevelstart = 99    -- Open files with all folds expanded
+        vim.lsp.handlers["$/progress"] = function() end  -- suppress LSP progress popups
       '';
 
       # Add commenting support with gc
