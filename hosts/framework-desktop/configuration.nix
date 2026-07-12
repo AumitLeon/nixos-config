@@ -139,6 +139,9 @@
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
+  nixpkgs.config.permittedInsecurePackages = [
+    "electron-39.8.10"
+  ];
 
   # Enable Ozone Wayland support for Electron apps (Spotify, etc.)
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
