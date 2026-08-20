@@ -56,7 +56,6 @@
     pkgs.gnupg
     pkgs.home-manager
     pkgs.htop
-    pkgs.hunk
     pkgs.jj-starship
     pkgs.jq
     pkgs.jujutsu
