@@ -45,6 +45,7 @@
   home.packages = [
     pkgs.amp-cli
     pkgs.atuin
+    pkgs.cachix
     pkgs.claude-code
     pkgs.codex
     pkgs.difftastic

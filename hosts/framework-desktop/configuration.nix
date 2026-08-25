@@ -12,6 +12,7 @@
     ./hardware-configuration.nix
     inputs.home-manager.nixosModules.default
     ../../modules/keyd.nix
+    ../../modules/cachix.nix
   ];
 
   # Be careful updating this.

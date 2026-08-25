@@ -67,6 +67,9 @@ vm/secrets:
 	rsync -av -e 'ssh $(SSH_OPTIONS)' \
 		--exclude='environment' \
 		$(HOME)/.ssh/ $(NIXUSER)@$(NIXADDR):~/.ssh
+	# Cachix auth token, so vm/cache-push can upload from the VM
+	rsync -av -e 'ssh $(SSH_OPTIONS)' \
+		$(HOME)/.config/cachix/ $(NIXUSER)@$(NIXADDR):~/.config/cachix
 
 # copy the Nix configurations into the VM.
 vm/copy:
@@ -75,9 +78,28 @@ vm/copy:
 		--rsync-path="sudo rsync" \
 		$(MAKEFILE_DIR)/ $(NIXUSER)@$(NIXADDR):/nixos-config
 
+# Cachix binary cache. Substituter/key are passed to vm/switch on the command
+# line so the very first switch (before the cache lands in /etc/nix/nix.conf)
+# can already pull from it.
+CACHIX_CACHE=aumitleon-nixos-cache
+CACHIX_SUBSTITUTER=https://$(CACHIX_CACHE).cachix.org
+CACHIX_PUBLIC_KEY=aumitleon-nixos-cache.cachix.org-1:EDT4nsToWhEzLYiB+KA3+1+YT0KfTa0rQzw/zeNx/DI=
+
 # run the nixos-rebuild switch command. This does NOT copy files so you
 # have to run vm/copy before.
 vm/switch:
 	ssh $(SSH_OPTIONS) -p$(NIXPORT) $(NIXUSER)@$(NIXADDR) " \
-		sudo NIXPKGS_ALLOW_UNSUPPORTED_SYSTEM=1 nixos-rebuild switch --show-trace -v --flake \"/nixos-config#${NIXNAME}\" \
+		sudo NIXPKGS_ALLOW_UNSUPPORTED_SYSTEM=1 nixos-rebuild switch --show-trace -v \
+			--option extra-substituters \"$(CACHIX_SUBSTITUTER)\" \
+			--option extra-trusted-public-keys \"$(CACHIX_PUBLIC_KEY)\" \
+			--flake \"/nixos-config#${NIXNAME}\" \
+	"
+
+# Push the VM's current system closure to the binary cache so future VMs can
+# pull the custom-built paths instead of compiling them. Idempotent: cachix
+# skips upstream (cache.nixos.org) paths and anything already pushed.
+# Requires the cachix auth token on the VM (copied by vm/secrets).
+vm/cache-push:
+	ssh $(SSH_OPTIONS) -p$(NIXPORT) $(NIXUSER)@$(NIXADDR) " \
+		cachix push $(CACHIX_CACHE) /run/current-system \
 	"
