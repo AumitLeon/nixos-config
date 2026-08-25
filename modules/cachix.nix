@@ -6,7 +6,13 @@
     trusted-users = ["root" "leon"];
 
     # extra-* appends to the defaults, so cache.nixos.org is preserved.
-    extra-substituters = ["https://aumitleon-nixos-cache.cachix.org"];
-    extra-trusted-public-keys = ["aumitleon-nixos-cache.cachix.org-1:EDT4nsToWhEzLYiB+KA3+1+YT0KfTa0rQzw/zeNx/DI="];
+    extra-substituters = [
+      "https://aumitleon-nixos-cache.cachix.org"
+      "https://aumitleon.cachix.org"
+    ];
+    extra-trusted-public-keys = [
+      "aumitleon-nixos-cache.cachix.org-1:EDT4nsToWhEzLYiB+KA3+1+YT0KfTa0rQzw/zeNx/DI="
+      "aumitleon.cachix.org-1:vzqvKKPEBiSsv9X+a6dFDK1SdtfvvF7tGN8V06VMVFU="
+    ];
   };
 }
