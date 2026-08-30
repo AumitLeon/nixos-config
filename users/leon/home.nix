@@ -212,6 +212,9 @@
     # cache the keys forever so we don't get asked for a password
     defaultCacheTtl = 31536000;
     maxCacheTtl = 31536000;
+    # SSH keys use separate TTLs; set them too or SSH re-prompts after ~2h
+    defaultCacheTtlSsh = 31536000;
+    maxCacheTtlSsh = 31536000;
   };
 
   # Let Home Manager install and manage itself.
