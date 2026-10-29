@@ -49,6 +49,7 @@
     pkgs.claude-code
     pkgs.codex
     pkgs.difftastic
+    pkgs.discord
     pkgs.eza
     pkgs.fastfetch
     pkgs.fzf
