@@ -2,6 +2,7 @@
   config,
   pkgs,
   inputs,
+  lib,
   ...
 }: {
   imports = [
@@ -145,30 +146,41 @@
         };
       };
 
-      # Dashboard
+      # Dashboard.
+      #
+      # nvf lazy-loads alpha-nvim (via lz.n, on VimEnter), so alpha is not on
+      # the runtimepath when a plain luaConfigRC block runs -- and nvf's own
+      # `theme` setup call would clobber our buttons anyway. So build the
+      # layout declaratively instead: `theme` and `layout` are mutually
+      # exclusive, so hand nvf one inline-Lua group that reuses the stock
+      # dashboard sections and swaps in buttons matching our keybindings. The
+      # inline Lua is emitted inside alpha's lazy-load hook, where the plugin
+      # is actually loaded.
       dashboard = {
         alpha = {
           enable = true;
-          theme = "dashboard"; # Options: "dashboard", "startify", "theta"
+          theme = null;
+          opts = {margin = 5;};
+          layout = [
+            {
+              type = "group";
+              val = lib.generators.mkLuaInline ''
+                (function()
+                  local dashboard = require("alpha.themes.dashboard")
+                  dashboard.section.buttons.val = {
+                    dashboard.button("SPC SPC", "  Find file", ":lua require('fzf-lua').files()<CR>"),
+                    dashboard.button("SPC /", "  Find text", ":lua require('fzf-lua').live_grep()<CR>"),
+                    dashboard.button("SPC f r", "  Recent files", ":lua require('fzf-lua').oldfiles()<CR>"),
+                    dashboard.button("SPC e", "  File explorer", ":NvimTreeToggle<CR>"),
+                    dashboard.button("q", "  Quit", ":qa<CR>"),
+                  }
+                  return dashboard.config.layout
+                end)()
+              '';
+            }
+          ];
         };
       };
-
-      # Customize alpha dashboard buttons to match keybindings
-      luaConfigRC.alphaButtons = ''
-        local alpha = require('alpha')
-        local dashboard = require('alpha.themes.dashboard')
-
-        -- Override buttons with your custom keybindings
-        dashboard.section.buttons.val = {
-          dashboard.button("SPC SPC", "  Find file", ":lua require('fzf-lua').files()<CR>"),
-          dashboard.button("SPC /", "  Find text", ":lua require('fzf-lua').live_grep()<CR>"),
-          dashboard.button("SPC f r", "  Recent files", ":lua require('fzf-lua').oldfiles()<CR>"),
-          dashboard.button("SPC e", "  File explorer", ":NvimTreeToggle<CR>"),
-          dashboard.button("q", "  Quit", ":qa<CR>"),
-        }
-
-        alpha.setup(dashboard.opts)
-      '';
       #
       # # Utility plugins
       # utility = {
