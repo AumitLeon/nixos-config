@@ -13,6 +13,7 @@
     inputs.home-manager.nixosModules.default
     ../../modules/keyd.nix
     ../../modules/cachix.nix
+    ../../modules/rex.nix
   ];
 
   # Be careful updating this.
